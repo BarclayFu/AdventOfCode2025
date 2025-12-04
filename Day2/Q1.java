@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Q2 {
+public class Q1 {
   public static void main(String[] args) {
     try (BufferedReader br = new BufferedReader(new FileReader("input.txt"))) {
       String line;
@@ -15,24 +15,9 @@ public class Q2 {
           Long end = Long.parseLong(pair[1]);
           for (long i = start; i <= end; i++) {
             String cur = String.valueOf(i);
-            int len = cur.length();
-            for (int j = 2; j <= len; j++) {
-              if (len % j != 0) {
-                continue;
-              } else {
-                int segmentLen = len / j;
-                String segment = cur.substring(0, segmentLen);
-                boolean allMatch = true;
-                for (int k = 1; k < j; k++) {
-                  if (!cur.substring(k * segmentLen, (k + 1) * segmentLen).equals(segment)) {
-                    allMatch = false;
-                    break;
-                  }
-                }
-                if (allMatch) {
-                  total += Long.parseLong(cur);
-                  break;
-                }
+            if (cur.length() % 2 == 0) {
+              if (cur.substring(0, cur.length() / 2).equals(cur.substring(cur.length() / 2))) {
+                total += Long.parseLong(cur);
               }
             }
           }
